@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Woven balls</title>
+    <style>
+		body {
+			font-family: Arial, sans-serif;
+			font-size: 14px;
+			line-height: 1.5;
+			color: #333;
+		}
+		/* Style for the side menu */
+		#menu {
+			position: fixed;
+			top: 0;
+			/*left: 0;*/
+			bottom: 0;
+			/*width: 250px;*/
+			background-color: #f1f1f1;
+			/*overflow-x: hidden;*/
+			/*transition: 0.5s;*/
+			padding-top: 60px;
+			z-index: 1;
+			width: 250px;
+			left: -250px;  /* push it off the screen by default */
+			overflow: auto;
+			height: 100vh;
+			transition: left 0.5s ease-in-out;  /* animate the movement */
+
+		}
+		#menu.open {
+			left: 0;  /* bring it back onto the screen when .open is added */
+		}
+		#menu a {
+			display: block;
+			padding-top: 0.2em;
+			padding-bottom: 0.3em;
+			padding-left: 2em;
+			text-decoration: none;
+			color: #000;
+		}
+		#menu a:hover {
+			background-color: #ddd;
+		}
+		#menu ul {
+			list-style-type: none; /* Removes the bullet points */
+			padding: 0; /* Removes the default padding */
+			margin: 0.5em;
+		}
+
+		#menu ul li {
+			margin-left: 0;
+			margin-top: 0;
+			margin-bottom: 0;
+			padding: 0; /* Adds a smaller amount of vertical padding */
+		}
+		/* Style for the button to toggle the menu */
+		#menu-button {
+			position: fixed;
+			top: 10px;
+			left: 10px;
+			padding: 5px;
+			background-color: #333;
+			color: #fff;
+			cursor: pointer;
+			z-index: 2;
+		}
+		/* Style for the iframe */
+		#iframe-container {
+			position: fixed;
+			top: 0;
+			left: 0px;
+			bottom: 0;
+			right: 0;
+			padding: 10px;
+			transition: 0.5s;
+		}
+		#iframe-container iframe {
+			width: 100%;
+			height: 100%;
+			border: none;
+		}
+		.group ul {
+			display: none;
+			padding-left: 20px; /* optional */
+			transition: 0.5s;
+		}
+		.group.active ul {
+			display: block;
+			transition: 0.5s;
+		}
+		.group-title {
+			cursor: pointer;
+			margin: 0.5em;
+			/* add more styles as needed */
+		}
+		.group-title::before {
+			content: "+";
+			display: inline-block;
+			margin-right: 10px;
+		}
+
+		.group.active .group-title::before {
+			content: "-";
+		}
+		#infoContainer {
+		  position: fixed;
+		  bottom: 0;
+		  left: 0;
+		  width: 100%;
+		  text-align: center;
+		  background: #f9f9f9; /* choose a background color that suits your design */
+		  padding: 0.5em;
+		  box-sizing: border-box;
+		  z-index: 1000; /* to make sure it's above the iframe */
+		}
+
+	</style>
+</head>
+<body>
+	<div id="menu">
+
+		<div class="group">
+			<div class="group-title" data-group="cub">Cube</div>
+			<ul id="cub">
+	
+				<li><a href="wovenStar_cub_0.html" target="contentFrame">Cube 0</a></li>
+				<li><a href="wovenStar_cub_0382.html" target="contentFrame">Cube 0.382</a></li>
+				<li><a href="wovenStar_cub_0921.html" target="contentFrame">Cube 0.921</a></li>
+			</ul>
+		</div>
+		<div class="group">
+			<div class="group-title" data-group="oct">Octahedron</div>
+			<ul id="oct">
+
+				<li><a href="wovenStar_oct_0.html" target="contentFrame">Octahedron 0</a></li>
+				<li><a href="wovenStar_oct_0208.html" target="contentFrame">Octahedron 0.208</a></li>
+				<li><a href="wovenStar_oct_0517.html" target="contentFrame">Octahedron 0.517</a></li>
+				<li><a href="wovenStar_oct_1206.html" target="contentFrame">Octahedron 1.206</a></li>
+			</ul>
+		</div>
+		<div class="group">
+			<div class="group-title" data-group="rhd">Rhombidodecahedron</div>
+			<ul id="rhd">
+				<li><a href="wovenStar_rhd_02415_power.html" target="contentFrame">Rhombidodecahedron 0.2415</a></li>
+				<li><a href="wovenStar_rhd_0401_clean.html" target="contentFrame">Rhombidodecahedron 0.401</a></li>
+				<li><a href="wovenStar_rhd_0528_clean.html" target="contentFrame">Rhombidodecahedron 0.528</a></li>
+				<li><a href="wovenStar_rhd_07485_power.html" target="contentFrame">Rhombidodecahedron 0.7485</a></li>
+				<li><a href="wovenStar_rhd_1225__power_rgb.html" target="contentFrame">Rhombidodecahedron 1.225</a></li>
+				<li><a href="wovenStar_rhd_1651_rgb.html" target="contentFrame">Rhombidodecahedron 1.651</a></li>
+			</ul>
+		</div>
+		<div class="group">
+			<div class="group-title" data-group="dod">Dodecahedron</div>
+			<ul id="dod">
+				<li><a href="wovenStar_dod_0_auto.html" target="contentFrame">Dodecahedron 0</a></li>
+				<li><a href="wovenStar_dod_0114.html" target="contentFrame">Dodecahedron 0.114</a></li>
+				<li><a href="wovenStar_dod_0284.html" target="contentFrame">Dodecahedron 0.284</a></li>
+				<li><a href="wovenStar_dod_059.html" target="contentFrame">Dodecahedron 0.59</a></li>
+				<li><a href="wovenStar_dod_095.html" target="contentFrame">Dodecahedron 0.95</a></li>
+				<li><a href="wovenStar_dod_153.html" target="contentFrame">Dodecahedron 1.53</a></li>
+			</ul>
+		</div>
+		<div class="group">
+			<div class="group-title" data-group="ico">Icosahedron</div>
+			<ul id="ico">
+				<li><a href="wovenStar_ico_0.html" target="contentFrame">Icosahedron 0</a></li>
+				<li><a href="wovenStar_ico_0055.html" target="contentFrame">Icosahedron 0.055</a></li>
+				<li><a href="wovenStar_ico_0128.html" target="contentFrame">Icosahedron 0.128</a></li>
+				<li><a href="wovenStar_ico_0262.html" target="contentFrame">Icosahedron 0.262</a></li>
+				<li><a href="wovenStar_ico_0375.html" target="contentFrame">Icosahedron 0.375</a></li>
+				<li><a href="wovenStar_ico_0504.html" target="contentFrame">Icosahedron 0.504</a></li>
+				<li><a href="wovenStar_ico_0608.html" target="contentFrame">Icosahedron 0.608</a></li>
+				<li><a href="wovenStar_ico_0692.html" target="contentFrame">Icosahedron 0.692</a></li>
+				<li><a href="wovenStar_ico_0847.html" target="contentFrame">Icosahedron 0.847</a></li>
+				<li><a href="wovenStar_ico_1176.html" target="contentFrame">Icosahedron 1.176</a></li>
+				<li><a href="wovenStar_ico_1389.html" target="contentFrame">Icosahedron 1.389</a></li>
+				<li><a href="wovenStar_ico_2205.html" target="contentFrame">Icosahedron 2.205</a></li>
+			</ul>
+		</div>
+		<div class="group">
+			<div class="group-title" data-group="tri">Rhombitriacontahedron</div>
+			<ul id="tri">
+				<li><a href="wovenStar_tri_0114.html" target="contentFrame">Rhombitriacontahedron 0.114</a></li>
+				<li><a href="wovenStar_tri_0877.html" target="contentFrame">Rhombitriacontahedron 0.877</a></li>
+				<li><a href="wovenStar_tri_1088.html" target="contentFrame">Rhombitriacontahedron 1.088</a></li>
+				<li><a href="wovenStar_tri_1283.html" target="contentFrame">Rhombitriacontahedron 1.283</a></li>
+				<li><a href="wovenStar_tri_1473.html" target="contentFrame">Rhombitriacontahedron 1.473</a></li>
+				<li><a href="wovenStar_tri_2176.html" target="contentFrame">Rhombitriacontahedron 2.176</a></li>
+				<li><a href="wovenStar_tri_2954.html" target="contentFrame">Rhombitriacontahedron 2.954</a></li>
+			</ul>
+		</div>
+		<a href="wovenStars_description.html" target="contentFrame">Home</a>
+	
+	</div>
+	<div id="menu-button">&#10006;</div>
+	<div id="iframe-container">
+	  <iframe id="contetFrame" name="contentFrame" src=""></iframe>
+	</div>
+	<div id="infoContainer"></div>
+	<script>
+
+	/*
+	//if (iframe.contentWindow.location.href.includes("description")) {
+
+	window.addEventListener('DOMContentLoaded', (event) => {
+		const urlParams = new URLSearchParams(window.location.search);
+		const model = urlParams.get('model');
+		let iframeSrc = 'wovenStars_description.html'; // default src
+		if (model) {
+			iframeSrc = 'wovenStar_' + model + '.html';
+		}
+
+		const iframe = document.querySelector('iframe[name="contentFrame"]');
+		iframe.src = iframeSrc;	
+	});
+	function toggleMenu() {
+		const menu = document.getElementById('menu');
+		const button = document.getElementById('menu-button');
+		const righFrame = document.getElementById('iframe-container');
+		if (menu.style.width === '0px') {
+		  menu.style.width = '250px';
+		  righFrame.style.left = '0px';
+		  button.innerHTML = '&#10006;';
+		} else {
+		  menu.style.width = '0px';
+		  button.style.left = '10px';
+		  righFrame.style.left = '0px';
+		  button.innerHTML = '&gt;';
+
+		}
+	}*/
+	  
+	document.querySelectorAll('.group-title').forEach(function(title) {
+	  title.addEventListener('click', function() {
+		var group = document.querySelector('#' + this.dataset.group).parentNode;
+		if (group.classList.contains('active')) {
+		  group.classList.remove('active');
+		} else {
+		  document.querySelectorAll('.group').forEach(function(group) {
+			group.classList.remove('active');
+		  });
+		  group.classList.add('active');
+		}
+	  });
+	});
+	window.addEventListener('DOMContentLoaded', (event) => {
+		let contentFrame = document.getElementsByName('contentFrame')[0];
+		let queryString = new URLSearchParams(window.location.search);
+		let model = queryString.get("model");
+		let menu = document.getElementById('menu');
+		let iframeContainer = document.getElementById('iframe-container');
+		let menuButton = document.getElementById('menu-button');
+		let links = menu.getElementsByTagName('a');
+
+		if(model) {
+			contentFrame.src = `wovenStar_${model}.html`;
+			menu.classList.remove('open');
+			iframeContainer.style.left = '0';
+			menuButton.innerHTML = '&gt;';
+		} else {
+			contentFrame.src = "wovenStars_description.html";
+			menu.classList.add('open');
+			iframeContainer.style.left = '250px'; // Adjust based on the width of your side menu
+			menuButton.innerHTML = '&#10006;';
+		}
+
+		let groups = document.querySelectorAll('.group');
+		for (let group of groups) {
+			group.addEventListener('click', function() {
+				this.classList.toggle('open');
+			});
+		}
+
+		for (let link of links) {
+			link.addEventListener('click', function() {
+				
+				if (link.href.includes("description")){
+					menu.classList.add('open');
+					iframeContainer.style.left = '250px';
+					menuButton.innerHTML = '&#10006;';
+					document.getElementById('infoContainer').innerHTML = "";
+
+				} else {
+					document.getElementById('infoContainer').innerHTML = this.innerHTML;
+					menu.classList.remove('open');
+					iframeContainer.style.left = '0';
+					menuButton.innerHTML = '&gt;';
+				}
+			});
+		}
+		
+
+		menuButton.addEventListener('click', function() {
+			menu.classList.toggle('open');
+			if(menu.classList.contains('open')) {
+				if (contentFrame.contentWindow.location.href.includes("description"))
+					iframeContainer.style.left = '250px'; // Adjust based on the width of your side menu
+				menuButton.innerHTML = '&#10006;';
+			} else {
+				iframeContainer.style.left = '0';
+				menuButton.innerHTML = '&gt;';
+			}
+		});
+	});
+
+
+	</script>
+</body>
+</html>
